@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+
+
 public class Program {
     public static void main(String[] args) {
+
+
         List<Person> people = getPeople();
 
         String lastName = "Williams";
@@ -49,13 +53,25 @@ public class Program {
     }
 
     private static double getAverageAge(List<Person> people) {
-        int totalAge = 0;
-        for (Person person : people) {
-            // totalAge = totalAge + person.getAge();
-            totalAge += person.getAge();
-        }
-        double averageAge = (double) totalAge / people.size();
+//        int totalAge = 0;
+//        for (Person person : people) {
+//            // totalAge = totalAge + person.getAge();
+//            totalAge += person.getAge();
+//        }
+//        double averageAge = (double) totalAge / people.size();
+//        return averageAge;
+
+//        List<Integer> ages = new ArrayList();
+//        ages.add(24);
+//        ages.add(28);
+//        ages.add(32);
+//
+//        System.out.println(ages);
+
+
+        double averageAge = people.stream().mapToInt(Person::getAge).average().orElse(0.0);
         return averageAge;
+
     }
 
     private static void printPeople(List<Person> people) {
