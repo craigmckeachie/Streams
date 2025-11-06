@@ -33,11 +33,19 @@ public class Program {
     }
 
     private static List<Integer> getAges(List<Person> people) {
-        List<Integer> ages = new ArrayList<>();
-        for (Person person : people) {
-            ages.add(person.getAge());
-        }
+//        List<Integer> ages = new ArrayList<>();
+//        for (Person person : people) {
+//            ages.add(person.getAge());
+//        }
+//        return ages;
+
+        List<Integer> ages = people.stream()
+//                                    .map(person -> person.getAge())
+                                    .map(Person::getAge)
+                                    .toList();
+
         return ages;
+
     }
 
     private static double getAverageAge(List<Person> people) {
@@ -51,26 +59,37 @@ public class Program {
     }
 
     private static void printPeople(List<Person> people) {
-        for (Person person : people) {
-            System.out.println(person);
-        }
+//        for (Person person : people) {
+//            System.out.println(person);
+//        }
+
+//        people.stream().forEach(person -> System.out.println(person));
+        people.stream().forEach(System.out::println);
     }
 
     private static List<Person> getPeopleByLastName(List<Person> people, String lastName) {
-        List<Person> matchingPeople = new ArrayList<>();
+//        List<Person> matchingPeople = new ArrayList<>();
+//
+//        for (Person person : people) {
+//            if(person.getLastName().equals(lastName)){
+//                matchingPeople.add(person);
+//            }
+//        }
+//        return matchingPeople;
 
-        for (Person person : people) {
-            if(person.getLastName().equals(lastName)){
-                matchingPeople.add(person);
-            }
-        }
+        List<Person> matchingPeople = people.stream()
+                .filter(person -> person.getLastName().equals(lastName))
+                .toList();
         return matchingPeople;
     }
+
+
 
     private static List<Person> getPeople() {
         List<Person> people = new ArrayList<>();
 
-        people.add(new Person("LeBron", "James", 39));
+        Person lebron = new Person("LeBron", "James", 39);
+        people.add(lebron);
         people.add(new Person("Stephen", "Curry", 36));
         people.add(new Person("Kevin", "Durant", 35));
         people.add(new Person("Giannis", "Antetokounmpo", 29));
